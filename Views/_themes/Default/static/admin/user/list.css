@@ -1,0 +1,55 @@
+#app-admin-user-list {
+
+}
+
+#app-admin-user-list > .quark-column{
+	gap: 10px;
+	flex: 1;
+}
+
+#app-admin-user-list-list {
+
+}
+
+#app-admin-user-list-list > .quark-column{
+	gap: 10px;
+	flex: 1;
+	max-width: 640px;
+}
+
+.app-admin-user-list-item {
+	gap: 20px;
+	align-items: center;
+}
+
+.app-admin-user-list-item-image {
+	background: center center no-repeat;
+	background-size: contain;
+	width: 60px;
+	height: 60px;
+}
+
+.app-admin-user-list-item-meta {
+	flex: 1;
+	gap: 10px;
+}
+
+.app-admin-user-list-item-meta-name {
+	font-family: 'Oswald',sans-serif;
+	font-size: 20px;
+	line-height: 24px;
+}
+
+.app-admin-user-list-item-meta-email {
+}
+
+.app-admin-user-list-item-meta-role {
+}
+
+.app-admin-user-list-item-meta-actions {
+	gap: 10px;
+}
+
+.app-admin-user-list-item-meta-actions .quark-link {
+
+}

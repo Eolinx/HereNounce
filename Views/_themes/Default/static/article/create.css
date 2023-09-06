@@ -1,0 +1,11 @@
+#app-article-create-main {
+
+}
+
+#app-article-create-main > .quark-column {
+	max-width: initial;
+}
+
+#app-article-create-main .quark-input textarea {
+	height: 240px;
+}

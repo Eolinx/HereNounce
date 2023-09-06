@@ -1,0 +1,153 @@
+#app-article-index {
+
+}
+
+#app-article-index h1 {
+	font-size: 32px;
+	line-height: 36px;
+}
+
+#app-article-index > .quark-column {
+	gap: 20px;
+	flex: 1;
+}
+
+#app-article-index-cover {
+	background: center center no-repeat;
+	background-size: cover;
+	height: 240px;
+}
+
+#app-article-index-meta {
+	margin: 30px 0 0 0;
+	background: rgb(50,50,50);
+	gap: 20px;
+	font-size: 12px;
+	line-height: 14px;
+	color: rgb(200,200,200);
+}
+
+.app-article-index-meta-item {
+	padding: 10px;
+}
+
+.app-article-index-meta-item > .quark-column {
+	flex: 1;
+	gap: 10px;
+}
+
+.app-article-index-meta-item-label {
+	color: rgb(120,120,120);
+}
+
+.app-article-index-meta-item-content {
+
+}
+
+
+
+#app-article-index-ratio {
+
+}
+
+#app-article-index-ratio > .quark-column {
+	align-items: flex-end;
+}
+
+#app-article-index-ratio .app-article-index-meta-item-content {
+	gap: 10px;
+}
+
+#app-article-index-ratio-total {
+	font-size: 28px;
+	line-height: 28px;
+}
+
+#app-article-index-ratio-user {
+
+}
+
+#app-article-index-ratio-ai {
+
+}
+
+
+
+
+#app-article-index-comments {
+	margin: 30px 0 0 0;
+}
+
+#app-article-index-comment {
+
+}
+
+#app-article-index-comment .quark-input {
+	flex: 1;
+}
+
+#app-article-index-comment-footer {
+	gap: 10px;
+}
+
+#app-article-index-comment-actions {
+	justify-content: center;
+}
+
+#app-article-index-comment-actions > .quark-container {
+	align-items: center;
+	gap: 10px;
+}
+
+#app-article-index-comment-actions .quark-button {
+	padding: 5px 10px;
+	font-size: 14px;
+	line-height: 14px;
+	font-weight: 600;
+	background: none;
+	border: 1px solid rgb(50,50,50);
+}
+
+#app-article-index-comment-actions .quark-button[data-article-ratio="down"] {
+	color: rgb(260,100,70);
+}
+
+#app-article-index-comment-actions .quark-button[data-article-ratio="down"]:hover,
+#app-article-index-comment-actions .quark-button[data-article-ratio="down"].active {
+	color: rgb(0,0,0);
+	border-color: rgb(260,100,70);
+	background: rgb(260,100,70);
+}
+
+#app-article-index-comment-actions .quark-button[data-article-ratio="up"] {
+	color: rgb(160, 200, 70);
+}
+
+#app-article-index-comment-actions .quark-button[data-article-ratio="up"]:hover,
+#app-article-index-comment-actions .quark-button[data-article-ratio="up"].active {
+	color: rgb(0,0,0);
+	border-color: rgb(160, 200, 70);
+	background: rgb(160, 200, 70);
+}
+
+
+
+
+
+@media only screen and (max-width: 480px) {
+	#app-article-index-meta {
+		gap: 10px;
+	}
+
+	.app-article-index-meta-item {
+		width: 100%;
+	}
+
+	.app-article-index-meta-item > .quark-column {
+		gap: 5px;
+	}
+
+	#app-article-index-ratio > .quark-column {
+		align-items: flex-start;
+	}
+}

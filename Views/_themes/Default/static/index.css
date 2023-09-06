@@ -1,0 +1,28 @@
+#app-index {
+	/*align-items: center;
+	justify-content: center;*/
+}
+
+#app-index > .quark-column {
+	flex: 1;
+	gap: 50px;
+	/*align-items: center;*/
+}
+
+#app-index > .quark-column > .quark-container {
+
+}
+
+#app-index h1 {
+	font-size: 36px;
+	line-height: 40px;
+	font-weight: 300;
+}
+
+#app-index-featured > .quark-column > .quark-container {
+	gap: 20px;
+}
+
+#app-index-feed > .quark-column > .quark-container > .quark-column {
+	gap: 20px;
+}
