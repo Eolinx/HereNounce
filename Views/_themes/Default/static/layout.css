@@ -356,7 +356,8 @@ form.quark-container > .quark-column {
 	/*max-width: 1220px;*/
 	display: grid;
 	grid-template-areas: "header-logo header-menu header-actions header-user";
-	grid-auto-columns: 167px auto auto minmax(auto, 240px);
+	/*grid-auto-columns: 167px auto auto minmax(auto, 240px);*/
+	grid-auto-columns: 167px minmax(auto, 550px) auto auto;
 }
 
 #app-header-logo {
@@ -450,7 +451,8 @@ form.quark-container > .quark-column {
 	align-items: flex-end;
 	justify-content: center;
 	height: 100%;
-	width: 270px;
+	/*width: 270px;*/
+	width: 110px;
 }
 
 
@@ -652,7 +654,7 @@ form.quark-container > .quark-column {
 }
 
 .app-article-item-title {
-	background: rgb(30,30,30,0.5);
+	background: rgb(30,30,30,0.75);
 	font-family: 'Sofia Sans Extra Condensed', sans-serif;
 	font-size: 42px;
 	line-height: 48px;
@@ -661,6 +663,10 @@ form.quark-container > .quark-column {
 	max-width: 100%;
 	padding: 10px;
 	/*padding: 10px 10px 0 10px;*/
+	text-decoration: none;
+}
+
+.app-article-item-title:hover {
 }
 
 .app-article-item-summary {
@@ -763,11 +769,12 @@ form.quark-container > .quark-column {
 .app-article-item.small {
 	/*grid-area: article-small;*/
 	max-width: 280px;
+	gap: 0;
 }
 
-.app-article-item.small .app-article-item {
+/*.app-article-item.small .app-article-item {
 	padding: 80px 0 0 0;
-}
+}*/
 
 .app-article-item.small .app-article-item-title {
 	font-size: 24px;
@@ -780,6 +787,7 @@ form.quark-container > .quark-column {
 	margin: 0;
 	max-width: none;
 	width: 100%;
+	flex: 1;
 }
 
 

@@ -1,4 +1,6 @@
 <?php
+
+use Extensions\Helix\HelixConfig;
 use Quark\Quark;
 use Quark\QuarkConfig;
 
@@ -16,6 +18,8 @@ use Models\User;
 const APP_DB = 'db';
 const APP_SESSION = 'session';
 
+const APP_HELIX = 'helix';
+
 const APP_CDN = 'cdn';
 
 $config = new QuarkConfig(__DIR__ . '/runtime/application.ini');
@@ -27,5 +31,7 @@ $config->DataProvider(APP_DB, new MySQL());
 $config->AuthorizationProvider(APP_SESSION, new Session(APP_DB), new User());
 
 $config->Extension(APP_CDN, new CDNConfig(new QuarkSelfCDN()));
+
+$config->Extension(APP_HELIX, new HelixConfig());
 
 Quark::Run($config);

@@ -10,7 +10,7 @@ use Models\Article;
 
 use ViewModels\Article\UpdateView;
 ?>
-<form class="quark-container" id="app-article-update" action="/article/update" method="POST">
+<form class="quark-container" id="app-article-update" action="/article/update/<?php echo $article->id; ?>" method="POST">
 	<div class="quark-column">
 		<div class="quark-container">
 			<div class="quark-column">

@@ -17,6 +17,7 @@ use Quark\QuarkModel;
 use Quark\QuarkModelBehavior;
 
 use Quark\Extensions\CDN\CDNResource;
+use Quark\QuarkSQL;
 
 /**
  * Class Article
@@ -162,5 +163,52 @@ class Article implements IQuarkModel, IQuarkStrongModel, IQuarkModelWithDataProv
 	 */
 	public function Ratio () {
 		return $this->ratio_user + $this->ratio_ai;
+	}
+
+	/**
+	 * @param QuarkDate $edge = null
+	 *
+	 * @return QuarkModel|Article
+	 */
+	public static function Top (QuarkDate $edge = null) {
+		if ($edge == null)
+			$edge = QuarkDate::NowUTC()->Offset('-1 day', true);
+
+		return QuarkModel::FindOne(
+			new Article(),
+			array(
+				'date_created' => array(
+					'$gte' => $edge->Format('Y-m-d H:i:s')
+				)
+			),
+			array(
+				//QuarkSQL::OPTION_ALIAS => 'a',
+				QuarkModel::OPTION_SORT => array(
+					'ratio_user' => -1
+				)
+			)
+		);
+	}
+
+	/**
+	 * @param QuarkDate $edge = null
+	 *
+	 * @return QuarkCollection|Article[]
+	 */
+	public static function Featured (QuarkDate $edge = null) {
+		if ($edge == null)
+			$edge = QuarkDate::NowUTC()->Offset('-1 week', true);
+
+		return QuarkModel::Find(
+			new Article(),
+			array(
+				'date_created' => array(
+					'$gte' => $edge->Format('Y-m-d H:i:s')
+				)
+			),
+			array(
+				QuarkModel::OPTION_LIMIT => 3
+			)
+		);
 	}
 }

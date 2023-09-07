@@ -38,6 +38,16 @@ class IndexService implements IQuarkGetService, IQuarkAuthorizableService {
 	 */
 	public function Get (QuarkDTO $request, QuarkSession $session) {
 		/**
+		 * @var QuarkModel|Article $top
+		 */
+		$top = Article::Top();
+
+		/**
+		 * @var QuarkCollection|Article[] $featured
+		 */
+		$featured = Article::Featured();
+
+		/**
 		 * @var QuarkCollection|Article[] $feed
 		 */
 		$feed = QuarkModel::Find(new Article(), array(), array(
@@ -47,6 +57,8 @@ class IndexService implements IQuarkGetService, IQuarkAuthorizableService {
 		));
 
 		return QuarkView::InLayout(new IndexView(), new LayoutView(), array(
+			'top' => $top,
+			'featured' => $featured,
 			'feed' => $feed
 		));
 	}
