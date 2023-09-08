@@ -174,6 +174,7 @@ class Article implements IQuarkModel, IQuarkStrongModel, IQuarkModelWithDataProv
 		if ($user == null) return false;
 
 		return QuarkModel::Exists(new ArticleComment(), array(
+			'article' => $this->id,
 			'user_created' => $user->id,
 			'ratio_article' => array('$ne' => 0)
 		));
