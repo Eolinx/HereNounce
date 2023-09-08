@@ -21,7 +21,7 @@ use ViewModels\IndexView;
 				<div class="quark-container" id="app-index-top">
 					<div class="quark-container app-article-item large" style="background-image: url(', $top->cover->URL(), ');">
 						<div class="quark-column">
-							<a class="quark-container quark-link app-article-item-title">
+							<a class="quark-container quark-link app-article-item-title" href="/article/', $top->id, '">
 								<!-- https://loremflickr.com/cache/resized/65535_52433126604_0a10060ffa_c_720_320_nofilter.jpg -->
 								', $top->title->Current(), '
 							</a>
@@ -52,7 +52,7 @@ use ViewModels\IndexView;
 					foreach ($featured as $article)
 						echo '
 							<div class="quark-column app-article-item small" style="background-image: url(', $article->cover->URL(), ');">
-								<a class="quark-container quark-link app-article-item-title">
+								<a class="quark-container quark-link app-article-item-title" href="/article/', $article->id, '">
 									', $article->title->Current(), '
 								</a>
 								<div class="quark-container app-article-item-meta">

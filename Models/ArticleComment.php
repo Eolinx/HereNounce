@@ -6,7 +6,7 @@ use Quark\IQuarkModelWithBeforeCreate;
 use Quark\IQuarkModelWithBeforeSave;
 use Quark\IQuarkModelWithDataProvider;
 use Quark\IQuarkNullableModel;
-use Quark\IQuarkStrongModel;
+use Quark\IQuarkStrongModelWithRuntimeFields;
 
 use Quark\QuarkDate;
 use Quark\QuarkLazyLink;
@@ -27,9 +27,15 @@ use Quark\QuarkModelBehavior;
  * @property QuarkDate $date_created
  * @property QuarkDate $date_updated
  *
+ * @property string article_ratio_action
+ *
  * @package Models
  */
-class ArticleComment implements IQuarkModel, IQuarkStrongModel, IQuarkModelWithDataProvider, IQuarkModelWithBeforeCreate, IQuarkModelWithBeforeSave, IQuarkNullableModel {
+class ArticleComment implements IQuarkModel, IQuarkStrongModelWithRuntimeFields, IQuarkModelWithDataProvider, IQuarkModelWithBeforeCreate, IQuarkModelWithBeforeSave, IQuarkNullableModel {
+	const ARTICLE_RATIO_ACTION_UP = 'up';
+	const ARTICLE_RATIO_ACTION_DOWN = 'down';
+	const ARTICLE_RATIO_ACTION_ = '';
+
 	use QuarkModelBehavior;
 
 	/**
@@ -63,7 +69,17 @@ class ArticleComment implements IQuarkModel, IQuarkStrongModel, IQuarkModelWithD
 	 */
 	public function Rules () {
 		return array(
-			$this->LocalizedAssert($this->comment->Assert(function ($value) {}, function () { return false; }), 'validation.article_comment.comment', 'comment')
+			$this->LocalizedAssert($this->comment->Assert(function ($value) {}, function () { return false; }), 'validation.article_comment.comment', 'comment'),
+			$this->LocalizedAssert(in_array($this->article_ratio_action, $this->Constants('#^ARTICLE_RATIO_ACTION_#is')), 'validation.model.article_comment.article_ratio_action', 'article_ratio_action')
+		);
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function RuntimeFields () {
+		return array(
+			'article_ratio_action' => ''
 		);
 	}
 
@@ -86,5 +102,15 @@ class ArticleComment implements IQuarkModel, IQuarkStrongModel, IQuarkModelWithD
 		$this->date_updated = QuarkDate::NowUTC();
 
 		$this->user_updated = $this->User();
+	}
+
+	/**
+	 * @return int
+	 */
+	public function ArticleRatioModifier () {
+		if ($this->article_ratio_action == self::ARTICLE_RATIO_ACTION_UP) return 1;
+		if ($this->article_ratio_action == self::ARTICLE_RATIO_ACTION_DOWN) return -1;
+
+		return 0;
 	}
 }

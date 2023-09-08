@@ -166,6 +166,20 @@ class Article implements IQuarkModel, IQuarkStrongModel, IQuarkModelWithDataProv
 	}
 
 	/**
+	 * @param QuarkModel|User $user = null
+	 *
+	 * @return bool
+	 */
+	public function VotedBy (QuarkModel $user = null) {
+		if ($user == null) return false;
+
+		return QuarkModel::Exists(new ArticleComment(), array(
+			'user_created' => $user->id,
+			'ratio_article' => array('$ne' => 0)
+		));
+	}
+
+	/**
 	 * @param QuarkDate $edge = null
 	 *
 	 * @return QuarkModel|Article

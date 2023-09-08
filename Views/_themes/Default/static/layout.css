@@ -793,6 +793,36 @@ form.quark-container > .quark-column {
 
 
 
+.app-article-comment {
+	gap: 10px;
+}
+
+/*.app-article-comment-author {
+	width: 100%;
+}*/
+
+.app-article-comment-author .app-user-avatar {
+	width: 30px;
+	height: 30px;
+}
+
+.app-article-comment-date {
+	color: rgb(100,100,100);
+	font-size: 12px;
+	line-height: 12px;
+	margin: 10px 0 5px 0;
+}
+
+.app-article-comment-content {
+	background: rgb(80,80,80);
+	padding: 10px;
+	justify-content: center;
+	/*margin: 0 0 0 40px;*/
+}
+
+
+
+
 .app-section-header {
 	font-size: 32px;
 	line-height: 36px;

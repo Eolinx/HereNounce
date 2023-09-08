@@ -63,6 +63,14 @@
 	line-height: 28px;
 }
 
+#app-article-index-ratio-total.lt {
+	color: rgb(260, 100, 70);
+}
+
+#app-article-index-ratio-total.gt {
+	color: rgb(160, 200, 70);
+}
+
 #app-article-index-ratio-user {
 
 }
@@ -76,6 +84,10 @@
 
 #app-article-index-comments {
 	margin: 30px 0 0 0;
+}
+
+#app-article-index-comments-list {
+	gap: 20px;
 }
 
 #app-article-index-comment {

@@ -54,7 +54,7 @@ class InstallService implements IQuarkTask {
 		$settings->Quark->WebHost = 'http://' . $hostname;
 		$settings->DataProviders->APP_DB = $mysql;
 		$settings->{'Extension:APP_CDN'}->WebHost = 'http://' . $hostname . '/cdn';
-		$settings->{'Extension:APP_HELIX'}->Port = $helix;
+		$settings->{'Extension:APP_HELIX'}->Endpoint = $helix;
 
 		$target = new QuarkFile(__DIR__ . '/../runtime/application.ini');
 

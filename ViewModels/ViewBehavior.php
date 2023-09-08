@@ -9,6 +9,7 @@ use Quark\QuarkModel;
 use Quark\QuarkViewBehavior;
 
 use Models\ISelectableModel;
+use Models\User;
 
 /**
  * Trait ViewBehavior
@@ -242,6 +243,26 @@ trait ViewBehavior {
 			$this->CurrentLocalizationOf('view.dialog.action.confirm'),
 			$this->CurrentLocalizationOf('view.dialog.action.close')
 		)));
+	}
+
+	/**
+	 * @param QuarkModel|User $user = null
+	 * @param string $id = ''
+	 *
+	 * @return string
+	 */
+	public function UserWidget (QuarkModel $user = null, $id = '', $actionLogout = false) {
+		return $user == null ? '' : ('
+			<div class="quark-container app-user"' . ($id == '' ? '' : ' id="' . $id . '"') .'>
+				<div class="quark-column app-user-avatar" style="background-image: url(' . $user->avatar->URL() . ');"></div>
+				<div class="quark-column app-user-meta">
+					<div class="quark-container app-user-meta-name">' . $user->name . '</div>
+					<div class="quark-container app-user-meta-actions">
+						' . ($actionLogout ? '<a class="quark-link" href="' . $this->Link('/user/logout', true) . '">Log out</a>' : '') . '
+					</div>
+				</div>
+			</div>
+		');
 	}
 
 	/**

@@ -29,6 +29,10 @@ $user_updated = $article->user_updated->Retrieve();
  * @var QuarkModel|ArticleComment $comment_model
  */
 $comment_model = new QuarkModel(new ArticleComment());
+
+$ratio_total = $article->Ratio();
+$ratio_total_lt = $ratio_total < 0 ? ' lt' : '';
+$ratio_total_gt = $ratio_total > 0 ? ' gt' : '';
 ?>
 <div class="quark-container" id="app-article-index">
 	<div class="quark-column fill">
@@ -84,8 +88,8 @@ $comment_model = new QuarkModel(new ArticleComment());
 				<div class="quark-column">
 					<div class="quark-container app-article-index-meta-item-label">Ratio</div>
 					<div class="quark-container app-article-index-meta-item-content">
-						<div class="quark-column" id="app-article-index-ratio-total" title="Total ratio">
-							<?php echo $article->Ratio(); ?>
+						<div class="quark-column<?php echo $ratio_total_lt, $ratio_total_gt; ?>" id="app-article-index-ratio-total" title="Total ratio">
+							<?php echo $ratio_total; ?>
 						</div>
 						<div class="quark-column">
 							<div class="quark-container" id="app-article-index-ratio-user" title="Ratio by users"><?php echo $article->ratio_user; ?></div>
@@ -106,13 +110,22 @@ $comment_model = new QuarkModel(new ArticleComment());
 						echo '<div class="quark-status info">There are no any comments yet</div>';
 
 					echo '
-						<div class="quark-column fill">
+						<div class="quark-column fill" id="app-article-index-comments-list">
 					';
 
 					foreach ($comments as $comment)
 						echo '
-							<div class="app-article-comment">
-								', $comment->comment->Current(), '
+							<div class="quark-container app-article-comment">
+								<div class="quark-column app-article-comment-author">
+									', $this->UserWidget($comment->user_created->Retrieve()), '
+								</div>
+								<div class="quark-column">
+									<div class="quark-container app-article-comment-date">
+										', $comment->date_created->Format('d.m.Y H:i'), '
+									</div>
+									<div class="quark-container app-article-comment-content">
+									', $comment->comment->Current(), '</div>
+								</div>
 							</div>
 						';
 
@@ -121,7 +134,7 @@ $comment_model = new QuarkModel(new ArticleComment());
 					';
 					?>
 				</div>
-				<form class="quark-container" id="app-article-index-comment" action="/article/comment/create" method="POST">
+				<form class="quark-container" id="app-article-index-comment" action="/article/comment/create/<?php echo $article->id; ?>" method="POST">
 					<div class="quark-column fill">
 						<div class="quark-container"></div>
 						<div class="quark-container">
@@ -140,6 +153,7 @@ $comment_model = new QuarkModel(new ArticleComment());
 							<div class="quark-column fill"></div>
 							<div class="quark-column" id="app-article-index-comment-actions">
 								<div class="quark-container">
+									<input type="hidden" name="article_ratio_action" />
 									<a class="quark-button fa fa-chevron-down" data-article-ratio="down"></a>
 									<a class="quark-button fa fa-chevron-up" data-article-ratio="up"></a>
 								</div>

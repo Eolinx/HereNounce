@@ -63,17 +63,7 @@ $user = $this->User();
 							<a class="quark-button" href="/user/login">Log in</a>
 						</div>
 					'
-					: '
-						<div class="quark-container app-user" id="app-header-user-authorized">
-							<div class="quark-column app-user-avatar" style="background-image: url(' . $user->avatar->URL() . ');"></div>
-							<div class="quark-column app-user-meta">
-								<div class="quark-container app-user-meta-name">' . $user->name . '</div>
-								<div class="quark-container app-user-meta-actions">
-									<a class="quark-link" href="' . $this->Link('/user/logout', true) . '">Log out</a>
-								</div>
-							</div>
-						</div>
-					';
+					: $this->UserWidget($user, 'app-header-user-authorized', true);
 				?>
 			</div>
 		</div>
