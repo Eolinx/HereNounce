@@ -23,6 +23,7 @@ const APP_HELIX = 'helix';
 const APP_CDN = 'cdn';
 
 $config = new QuarkConfig(__DIR__ . '/runtime/application.ini');
+$config->AllowINIFallback(true);
 
 $config->Localization(__DIR__ . '/localization.ini');
 
