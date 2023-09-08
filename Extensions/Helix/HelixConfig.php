@@ -10,7 +10,7 @@ use Quark\IQuarkExtensionConfig;
  * @package Extensions\Helix
  */
 class HelixConfig implements IQuarkExtensionConfig {
-	const DEFAULT_PORT = 8001;
+	const DEFAULT_ENDPOINT = 'http://127.0.0.1:8011';
 
 	/**
 	 * @var string $_name = ''
@@ -18,20 +18,20 @@ class HelixConfig implements IQuarkExtensionConfig {
 	private $_name = '';
 
 	/**
-	 * @var int $_port = self::DEFAULT_PORT
+	 * @var string $_endpoint = self::DEFAULT_ENDPOINT
 	 */
-	private $_port = self::DEFAULT_PORT;
+	private $_endpoint = self::DEFAULT_ENDPOINT;
 
 	/**
-	 * @param int $port = self::DEFAULT_PORT
+	 * @param string $endpoint = self::DEFAULT_ENDPOINT
 	 *
-	 * @return int
+	 * @return string
 	 */
-	public function Port ($port = self::DEFAULT_PORT) {
+	public function Endpoint ($endpoint = self::DEFAULT_ENDPOINT) {
 		if (func_num_args() != 0)
-			$this->_port = $port;
+			$this->_endpoint = $endpoint;
 
-		return $this->_port;
+		return $this->_endpoint;
 	}
 
 	/**
@@ -54,8 +54,8 @@ class HelixConfig implements IQuarkExtensionConfig {
 	 * @return mixed
 	 */
 	public function ExtensionOptions ($ini) {
-		if (isset($ini->Port))
-			$this->Port((int)$ini->Port);
+		if (isset($ini->Endpoint))
+			$this->Endpoint($ini->Endpoint);
 	}
 
 	/**

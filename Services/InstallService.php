@@ -1,7 +1,6 @@
 <?php
 namespace Services;
 
-use Quark\DataProviders\MySQL;
 use Quark\IQuarkTask;
 
 use Quark\Quark;
@@ -9,6 +8,10 @@ use Quark\QuarkCLIViewBehavior;
 use Quark\QuarkFile;
 use Quark\QuarkINIIOProcessor;
 use Quark\QuarkURI;
+
+use Quark\DataProviders\MySQL;
+
+use Extensions\Helix\HelixConfig;
 
 /**
  * Class InstallService
@@ -25,19 +28,22 @@ class InstallService implements IQuarkTask {
 	 * @return mixed
 	 */
 	public function Task ($argc, $argv) {
+		$env = isset($argv[2]) && $argv[2] == '-e';
+
 		$this->ShellView(
 			'HereNounce Installation',
 			'Welcome to HereNounce installation'
 		);
 
 		echo "\r\n", 'Enter node hostname: ';
-		$hostname = \readline();
+		$hostname = $env ? getenv('HERENOUNCE_HOSTNAME') : \readline();
 
-		echo "\r\n", 'Enter local Helix port (default 8001): ';
-		$helix = (int)\readline();
+		echo "\r\n", 'Enter local Helix endpoint (leave blank for default http://127.0.0.1:8011): ';
+		$helix = $env ? 'http://helix' : \readline();
+		if ($helix == '') $helix = HelixConfig::DEFAULT_ENDPOINT;
 
 		echo "\r\n", 'Enter MySQL connection URI: ';
-		$mysql = \readline();
+		$mysql = $env ? 'mysql://' . getenv('DB_USER') . ':' . getenv('DB_PASS') . '@db:3306/' . getenv('DB_NAME') : \readline();
 
 		echo "\r\n", 'Applying settings... ';
 		$source = new QuarkFile(__DIR__ . '/../.devops/docker/filesystem/app/runtime/application.ini', true);
@@ -72,9 +78,6 @@ class InstallService implements IQuarkTask {
 		$ok = $db->Query(preg_replace('#/\*([^/*]*)\*/;#Uis', '', $sql->Content()), array(
 			MySQL::OPTION_QUERY_MULTIPLE => true
 		));
-		/*$ok = $db->Query($sql->Content(), array(
-			MySQL::OPTION_QUERY_MULTIPLE => true
-		))*/;
 
 		if (!$ok) {
 			echo 'FAILURE. Check application.log for details.';

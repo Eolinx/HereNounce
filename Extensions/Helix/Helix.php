@@ -39,7 +39,7 @@ class Helix implements IQuarkExtension {
 
 			if ($buffer instanceof QuarkDTO)
 				$response = $buffer;
-			
+
 			// TODO: log error
 		}
 
@@ -50,7 +50,7 @@ class Helix implements IQuarkExtension {
 
 	public function APINetwork () {
 		$response = QuarkHTTPClient::To(
-			'http://localhost:' . $this->_config->Port() . '/api/network',
+			$this->_config->Endpoint() . '/api/network',
 			QuarkDTO::ForGET(),
 			new QuarkDTO(new QuarkJSONIOProcessor())
 		);
