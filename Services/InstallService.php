@@ -82,6 +82,6 @@ class InstallService implements IQuarkTask {
 		}
 		echo 'OK', "\r\n";
 
-		echo "\r\n", $this->ShellLineSuccess('Installation complete!');
+		echo "\r\n", $this->ShellLineSuccess('Installation complete!', true);
 	}
 }

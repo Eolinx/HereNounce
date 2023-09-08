@@ -34,8 +34,14 @@ class Helix implements IQuarkExtension {
 		$path = str_replace('--helix/', '', $request->URI()->path);
 		$response = QuarkDTO::ForResponse(new QuarkJSONIOProcessor(), QuarkDTO::STATUS_400_BAD_REQUEST);
 
-		if (preg_match('#^/api/network#is', $path))
-			$response = $this->APINetwork();
+		if (preg_match('#^/api/network#is', $path)) {
+			$buffer = $this->APINetwork();
+
+			if ($buffer instanceof QuarkDTO)
+				$response = $buffer;
+			
+			// TODO: log error
+		}
 
 		$response->Raw('');
 
